@@ -5,822 +5,312 @@
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>Kalkulačka stavby krbu | krbylevne.cz</title>
 <link rel="preconnect" href="https://fonts.googleapis.com">
-<link href="https://fonts.googleapis.com/css2?family=DM+Serif+Display&family=DM+Sans:wght@300;400;500&display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=Barlow:wght@400;500;600;700&family=Barlow+Condensed:wght@600;700&display=swap" rel="stylesheet">
 <style>
-  :root {
-    --fire: #C8440A;
-    --fire-light: #F26722;
-    --ember: #F5A623;
-    --smoke: #2C2825;
-    --ash: #6B6560;
-    --cream: #FBF7F2;
-    --warm-white: #FFFFFF;
-    --border: #E8E0D6;
-    --success: #2D7D46;
-  }
-  *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
-  body {
-    font-family: 'DM Sans', sans-serif;
-    background: var(--cream);
-    color: var(--smoke);
-    min-height: 100vh;
-  }
+:root {
+  --red: #CC1F27;
+  --red-dark: #A01820;
+  --red-light: #F5E8E9;
+  --dark: #1A1A1A;
+  --mid: #555;
+  --muted: #888;
+  --border: #E2E2E2;
+  --bg: #F7F7F7;
+  --white: #FFFFFF;
+}
+*,*::before,*::after{box-sizing:border-box;margin:0;padding:0}
+body{font-family:'Barlow',sans-serif;background:var(--bg);color:var(--dark);min-height:100vh}
 
-  /* HEADER */
-  header {
-    background: var(--smoke);
-    padding: 16px 32px;
-    display: flex;
-    align-items: center;
-    justify-content: space-between;
-  }
-  .logo {
-    display: flex;
-    align-items: center;
-    gap: 12px;
-    text-decoration: none;
-  }
-  .logo-flame {
-    width: 36px;
-    height: 36px;
-  }
-  .logo-text {
-    font-family: 'DM Serif Display', serif;
-    font-size: 22px;
-    color: var(--warm-white);
-    letter-spacing: -0.5px;
-  }
-  .logo-text span { color: var(--fire-light); }
-  .header-link {
-    font-size: 13px;
-    color: var(--ash);
-    text-decoration: none;
-    transition: color .2s;
-  }
-  .header-link:hover { color: var(--cream); }
+/* HEADER */
+header{background:var(--white);border-bottom:3px solid var(--red);padding:0 32px;height:64px;display:flex;align-items:center;justify-content:space-between;position:sticky;top:0;z-index:100;box-shadow:0 2px 8px rgba(0,0,0,.08)}
+.logo img{height:36px;display:block}
+.header-right{display:flex;align-items:center;gap:24px}
+.header-link{font-size:13px;font-weight:500;color:var(--muted);text-decoration:none;transition:color .15s}
+.header-link:hover{color:var(--red)}
+.header-phone{font-size:14px;font-weight:600;color:var(--red);text-decoration:none}
 
-  /* HERO */
-  .hero {
-    background: linear-gradient(135deg, var(--smoke) 0%, #3D3530 100%);
-    padding: 56px 32px 48px;
-    text-align: center;
-    position: relative;
-    overflow: hidden;
-  }
-  .hero::before {
-    content: '';
-    position: absolute;
-    inset: 0;
-    background: radial-gradient(ellipse at 60% 80%, rgba(242,103,34,0.18) 0%, transparent 60%);
-  }
-  .hero-eyebrow {
-    font-size: 12px;
-    font-weight: 500;
-    letter-spacing: .12em;
-    text-transform: uppercase;
-    color: var(--fire-light);
-    margin-bottom: 12px;
-    position: relative;
-  }
-  .hero h1 {
-    font-family: 'DM Serif Display', serif;
-    font-size: clamp(28px, 5vw, 46px);
-    color: var(--warm-white);
-    line-height: 1.15;
-    margin-bottom: 16px;
-    position: relative;
-  }
-  .hero p {
-    font-size: 16px;
-    color: rgba(255,255,255,0.6);
-    max-width: 520px;
-    margin: 0 auto;
-    line-height: 1.6;
-    position: relative;
-  }
+/* HERO */
+.hero{background:var(--red);padding:48px 32px 40px;position:relative;overflow:hidden}
+.hero::after{content:'';position:absolute;right:-40px;top:-40px;width:280px;height:280px;background:rgba(255,255,255,.06);border-radius:50%}
+.hero::before{content:'';position:absolute;right:60px;bottom:-60px;width:180px;height:180px;background:rgba(255,255,255,.04);border-radius:50%}
+.hero-inner{max-width:680px;margin:0 auto;position:relative}
+.hero-badge{display:inline-block;background:rgba(255,255,255,.2);color:#fff;font-size:11px;font-weight:600;letter-spacing:.1em;text-transform:uppercase;padding:4px 12px;border-radius:3px;margin-bottom:14px}
+.hero h1{font-family:'Barlow Condensed',sans-serif;font-size:clamp(28px,5vw,48px);font-weight:700;color:#fff;line-height:1.1;margin-bottom:12px;text-transform:uppercase;letter-spacing:-.5px}
+.hero h1 span{color:rgba(255,255,255,.7);font-weight:600}
+.hero p{font-size:15px;color:rgba(255,255,255,.8);line-height:1.6;max-width:500px}
 
-  /* PROGRESS BAR */
-  .progress-wrap {
-    background: var(--warm-white);
-    border-bottom: 1px solid var(--border);
-    padding: 20px 32px;
-    position: sticky;
-    top: 0;
-    z-index: 10;
-  }
-  .progress-label {
-    display: flex;
-    justify-content: space-between;
-    font-size: 12px;
-    color: var(--ash);
-    margin-bottom: 8px;
-    font-weight: 500;
-  }
-  .progress-bar-bg {
-    height: 4px;
-    background: var(--border);
-    border-radius: 2px;
-    overflow: hidden;
-  }
-  .progress-bar-fill {
-    height: 100%;
-    background: linear-gradient(90deg, var(--fire), var(--fire-light));
-    border-radius: 2px;
-    transition: width .4s cubic-bezier(.4,0,.2,1);
-  }
-  .steps-dots {
-    display: flex;
-    gap: 6px;
-    margin-top: 10px;
-    justify-content: center;
-  }
-  .dot {
-    width: 7px; height: 7px;
-    border-radius: 50%;
-    background: var(--border);
-    transition: all .2s;
-  }
-  .dot.done { background: var(--fire-light); }
-  .dot.active { background: var(--fire); width: 20px; border-radius: 4px; }
+/* PROGRESS */
+.prog-wrap{background:var(--white);border-bottom:1px solid var(--border);padding:14px 32px;position:sticky;top:64px;z-index:90}
+.prog-inner{max-width:680px;margin:0 auto}
+.prog-meta{display:flex;justify-content:space-between;font-size:12px;font-weight:600;color:var(--muted);margin-bottom:7px;text-transform:uppercase;letter-spacing:.05em}
+.prog-track{height:3px;background:var(--border);border-radius:2px;overflow:hidden}
+.prog-fill{height:100%;background:var(--red);transition:width .4s ease}
+.dots{display:flex;gap:5px;justify-content:center;margin-top:10px}
+.dot{width:7px;height:7px;border-radius:50%;background:var(--border);transition:all .2s}
+.dot.done{background:var(--red);opacity:.5}
+.dot.active{background:var(--red);width:22px;border-radius:4px}
 
-  /* MAIN CONTENT */
-  main { max-width: 680px; margin: 0 auto; padding: 40px 20px 80px; }
+/* MAIN */
+main{max-width:680px;margin:0 auto;padding:36px 20px 80px}
 
-  /* STEP CARD */
-  .step { display: none; animation: fadeIn .3s ease; }
-  .step.active { display: block; }
-  @keyframes fadeIn { from { opacity: 0; transform: translateY(8px); } to { opacity: 1; transform: none; } }
+/* STEP */
+.step{display:none}
+.step.active{display:block;animation:fadeUp .25s ease}
+@keyframes fadeUp{from{opacity:0;transform:translateY(6px)}to{opacity:1;transform:none}}
+.step-num{font-size:11px;font-weight:700;letter-spacing:.1em;text-transform:uppercase;color:var(--red);margin-bottom:6px}
+.step h2{font-family:'Barlow Condensed',sans-serif;font-size:30px;font-weight:700;text-transform:uppercase;color:var(--dark);margin-bottom:6px;letter-spacing:-.3px}
+.step-sub{font-size:15px;color:var(--mid);margin-bottom:26px;line-height:1.6}
 
-  .step-eyebrow {
-    font-size: 11px;
-    font-weight: 500;
-    letter-spacing: .1em;
-    text-transform: uppercase;
-    color: var(--fire);
-    margin-bottom: 8px;
-  }
-  .step h2 {
-    font-family: 'DM Serif Display', serif;
-    font-size: 28px;
-    color: var(--smoke);
-    margin-bottom: 8px;
-    line-height: 1.2;
-  }
-  .step-sub {
-    font-size: 15px;
-    color: var(--ash);
-    margin-bottom: 28px;
-    line-height: 1.6;
-  }
+/* OPTIONS */
+.opts{display:grid;grid-template-columns:repeat(auto-fit,minmax(155px,1fr));gap:10px;margin-bottom:28px}
+.opt{background:var(--white);border:2px solid var(--border);border-radius:6px;padding:18px 14px;cursor:pointer;transition:all .15s;text-align:left}
+.opt:hover{border-color:var(--red);background:#FFFAFA}
+.opt.sel{border-color:var(--red);background:#FFFAFA;box-shadow:0 0 0 3px rgba(204,31,39,.08)}
+.opt-icon{font-size:22px;margin-bottom:8px;display:block}
+.opt-title{font-size:14px;font-weight:600;color:var(--dark);margin-bottom:3px}
+.opt-sub{font-size:12px;color:var(--muted);line-height:1.5}
 
-  /* OPTION CARDS */
-  .opts { display: grid; grid-template-columns: repeat(auto-fit, minmax(160px, 1fr)); gap: 12px; margin-bottom: 32px; }
-  .opt {
-    background: var(--warm-white);
-    border: 1.5px solid var(--border);
-    border-radius: 14px;
-    padding: 20px 16px;
-    cursor: pointer;
-    transition: border-color .15s, box-shadow .15s, transform .1s;
-    text-align: left;
-  }
-  .opt:hover {
-    border-color: var(--fire-light);
-    box-shadow: 0 4px 20px rgba(200,68,10,.1);
-  }
-  .opt.sel {
-    border-color: var(--fire);
-    border-width: 2px;
-    background: #FFF8F4;
-    box-shadow: 0 4px 20px rgba(200,68,10,.12);
-  }
-  .opt-icon { font-size: 24px; margin-bottom: 10px; display: block; }
-  .opt-title { font-size: 15px; font-weight: 500; color: var(--smoke); margin-bottom: 4px; }
-  .opt-sub { font-size: 12px; color: var(--ash); line-height: 1.5; }
+/* FORM */
+.fields{display:grid;grid-template-columns:1fr 1fr;gap:14px;margin-bottom:26px}
+@media(max-width:480px){.fields{grid-template-columns:1fr}}
+.field label{display:block;font-size:12px;font-weight:600;color:var(--mid);text-transform:uppercase;letter-spacing:.05em;margin-bottom:6px}
+.field input{width:100%;padding:11px 13px;border:2px solid var(--border);border-radius:5px;font-family:'Barlow',sans-serif;font-size:15px;font-weight:500;color:var(--dark);background:var(--white);transition:border-color .15s}
+.field input:focus{outline:none;border-color:var(--red)}
+.info-box{background:var(--red-light);border-left:3px solid var(--red);padding:12px 16px;border-radius:0 5px 5px 0;font-size:13px;color:var(--dark);line-height:1.6;margin-bottom:26px}
 
-  /* FORM FIELDS */
-  .fields { display: grid; grid-template-columns: 1fr 1fr; gap: 16px; margin-bottom: 28px; }
-  @media(max-width: 480px) { .fields { grid-template-columns: 1fr; } }
-  .field label { display: block; font-size: 13px; font-weight: 500; color: var(--ash); margin-bottom: 6px; }
-  .field input, .field select {
-    width: 100%;
-    padding: 12px 14px;
-    border: 1.5px solid var(--border);
-    border-radius: 10px;
-    font-family: 'DM Sans', sans-serif;
-    font-size: 15px;
-    color: var(--smoke);
-    background: var(--warm-white);
-    transition: border-color .15s;
-  }
-  .field input:focus, .field select:focus {
-    outline: none;
-    border-color: var(--fire);
-  }
+/* NAV */
+.nav-row{display:flex;gap:10px;justify-content:space-between;align-items:center}
+.btn{padding:12px 24px;border-radius:5px;font-family:'Barlow',sans-serif;font-size:14px;font-weight:600;cursor:pointer;border:2px solid var(--border);background:var(--white);color:var(--dark);text-transform:uppercase;letter-spacing:.05em;transition:all .15s}
+.btn:hover{border-color:var(--red);color:var(--red)}
+.btn:disabled{opacity:.3;cursor:default;pointer-events:none}
+.btn-primary{background:var(--red);color:#fff;border-color:var(--red);padding:12px 36px}
+.btn-primary:hover{background:var(--red-dark);border-color:var(--red-dark);color:#fff}
 
-  /* INFO BOX */
-  .info-box {
-    background: #FFF8F4;
-    border-left: 3px solid var(--fire-light);
-    border-radius: 0 10px 10px 0;
-    padding: 14px 16px;
-    font-size: 14px;
-    color: var(--smoke);
-    line-height: 1.6;
-    margin-bottom: 28px;
-  }
+/* DIVIDER */
+.divider{height:1px;background:var(--border);margin:28px 0}
 
-  /* NAV BUTTONS */
-  .nav-row { display: flex; gap: 12px; justify-content: space-between; align-items: center; }
-  .btn {
-    padding: 13px 28px;
-    border-radius: 10px;
-    font-family: 'DM Sans', sans-serif;
-    font-size: 15px;
-    font-weight: 500;
-    cursor: pointer;
-    transition: all .15s;
-    border: 1.5px solid var(--border);
-    background: var(--warm-white);
-    color: var(--smoke);
-  }
-  .btn:hover { background: var(--cream); }
-  .btn:disabled { opacity: .35; cursor: default; }
-  .btn-primary {
-    background: var(--fire);
-    color: #fff;
-    border-color: var(--fire);
-    padding: 13px 36px;
-  }
-  .btn-primary:hover { background: var(--fire-light); border-color: var(--fire-light); }
+/* RESULTS */
+.result-banner{background:var(--dark);border-radius:6px;padding:24px 28px;margin-bottom:24px;display:grid;grid-template-columns:1fr 1fr;gap:20px}
+@media(max-width:480px){.result-banner{grid-template-columns:1fr}}
+.stat-lbl{font-size:10px;font-weight:700;letter-spacing:.1em;text-transform:uppercase;color:rgba(255,255,255,.4);margin-bottom:6px}
+.stat-val{font-family:'Barlow Condensed',sans-serif;font-size:34px;font-weight:700;color:#fff;line-height:1}
+.stat-val.red{color:var(--red)}
+.stat-note{font-size:11px;color:rgba(255,255,255,.3);margin-top:4px}
 
-  /* RESULTS */
-  .result-hero {
-    background: var(--smoke);
-    border-radius: 16px;
-    padding: 28px 28px 24px;
-    margin-bottom: 24px;
-    display: grid;
-    grid-template-columns: 1fr 1fr;
-    gap: 20px;
-  }
-  @media(max-width: 480px) { .result-hero { grid-template-columns: 1fr; } }
-  .stat-card { }
-  .stat-label { font-size: 11px; font-weight: 500; letter-spacing: .08em; text-transform: uppercase; color: rgba(255,255,255,.5); margin-bottom: 6px; }
-  .stat-val { font-family: 'DM Serif Display', serif; font-size: 30px; color: #fff; line-height: 1; }
-  .stat-val.accent { color: var(--fire-light); }
-  .stat-sub { font-size: 12px; color: rgba(255,255,255,.4); margin-top: 4px; }
+.sec-head{font-size:10px;font-weight:700;letter-spacing:.1em;text-transform:uppercase;color:var(--muted);padding:18px 0 8px;border-bottom:2px solid var(--border);margin-bottom:2px}
+.mat-row{display:flex;align-items:center;gap:8px;padding:10px 0;border-bottom:1px solid var(--border)}
+.mat-row:last-child{border-bottom:none}
+.mat-name{flex:1;font-size:13px;color:var(--dark);line-height:1.4}
+.mat-qty{font-size:12px;color:var(--muted);min-width:42px;text-align:right;white-space:nowrap}
+.mat-price{font-size:13px;font-weight:600;color:var(--dark);min-width:76px;text-align:right}
+.mat-btn{font-size:11px;font-weight:700;color:var(--red);text-decoration:none;white-space:nowrap;padding:4px 8px;border:1.5px solid var(--red);border-radius:3px;text-transform:uppercase;letter-spacing:.04em;transition:all .15s}
+.mat-btn:hover{background:var(--red);color:#fff}
 
-  .section-head {
-    font-size: 11px;
-    font-weight: 500;
-    letter-spacing: .1em;
-    text-transform: uppercase;
-    color: var(--ash);
-    padding: 20px 0 10px;
-    border-bottom: 1px solid var(--border);
-    margin-bottom: 4px;
-  }
+.total-box{background:var(--white);border:2px solid var(--border);border-radius:6px;padding:18px 22px;margin-top:18px;display:flex;justify-content:space-between;align-items:center}
+.total-lbl{font-size:14px;font-weight:600;color:var(--dark)}
+.total-sub{font-size:11px;color:var(--muted);margin-top:3px}
+.total-val{font-family:'Barlow Condensed',sans-serif;font-size:34px;font-weight:700;color:var(--red)}
 
-  .mat-row {
-    display: flex;
-    align-items: center;
-    gap: 10px;
-    padding: 11px 0;
-    border-bottom: 1px solid var(--border);
-  }
-  .mat-row:last-child { border-bottom: none; }
-  .mat-name { flex: 1; font-size: 14px; color: var(--smoke); line-height: 1.4; }
-  .mat-qty { font-size: 13px; color: var(--ash); white-space: nowrap; min-width: 44px; text-align: right; }
-  .mat-price { font-size: 14px; font-weight: 500; color: var(--smoke); min-width: 80px; text-align: right; }
-  .mat-btn {
-    font-size: 12px;
-    color: var(--fire);
-    text-decoration: none;
-    white-space: nowrap;
-    font-weight: 500;
-    padding: 4px 8px;
-    border-radius: 6px;
-    border: 1px solid rgba(200,68,10,.3);
-    transition: all .15s;
-  }
-  .mat-btn:hover { background: var(--fire); color: #fff; border-color: var(--fire); }
+/* CONTACT */
+.contact-card{background:var(--white);border:2px solid var(--border);border-radius:6px;padding:26px;margin-top:26px}
+.contact-card h3{font-family:'Barlow Condensed',sans-serif;font-size:22px;font-weight:700;text-transform:uppercase;margin-bottom:6px}
+.contact-card p{font-size:13px;color:var(--mid);margin-bottom:18px;line-height:1.6}
+.form-row{display:grid;grid-template-columns:1fr 1fr;gap:10px;margin-bottom:10px}
+@media(max-width:480px){.form-row{grid-template-columns:1fr}}
+.form-field label{display:block;font-size:11px;font-weight:700;text-transform:uppercase;letter-spacing:.05em;color:var(--muted);margin-bottom:5px}
+.form-field input,.form-field textarea{width:100%;padding:10px 12px;border:2px solid var(--border);border-radius:4px;font-family:'Barlow',sans-serif;font-size:14px;color:var(--dark);background:var(--bg);transition:border-color .15s;resize:vertical}
+.form-field input:focus,.form-field textarea:focus{outline:none;border-color:var(--red);background:var(--white)}
+.form-row-full{margin-bottom:10px}
+.submit-row{display:flex;gap:14px;align-items:center;margin-top:16px;flex-wrap:wrap}
+.btn-submit{background:var(--red);color:#fff;border:none;padding:13px 32px;border-radius:4px;font-family:'Barlow',sans-serif;font-size:14px;font-weight:700;text-transform:uppercase;letter-spacing:.05em;cursor:pointer;transition:background .15s}
+.btn-submit:hover{background:var(--red-dark)}
+.submit-note{font-size:12px;color:var(--muted);line-height:1.5}
+.success-msg{display:none;background:#EDFAF2;border:2px solid #9ED8B4;border-radius:5px;padding:12px 16px;font-size:14px;font-weight:600;color:#2D7D46;margin-top:14px}
 
-  .total-box {
-    background: var(--warm-white);
-    border: 1.5px solid var(--border);
-    border-radius: 14px;
-    padding: 20px 24px;
-    margin-top: 20px;
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
-  }
-  .total-label { font-size: 15px; font-weight: 500; color: var(--smoke); }
-  .total-sub { font-size: 12px; color: var(--ash); margin-top: 3px; }
-  .total-val { font-family: 'DM Serif Display', serif; font-size: 32px; color: var(--fire); }
+.cta-row{display:flex;gap:10px;margin-top:24px;flex-wrap:wrap}
+.cta-row a{flex:1;text-align:center;padding:13px 18px;border-radius:4px;font-size:13px;font-weight:700;text-decoration:none;text-transform:uppercase;letter-spacing:.05em;transition:all .15s;min-width:130px}
+.cta-a{background:var(--red);color:#fff}
+.cta-a:hover{background:var(--red-dark)}
+.cta-b{background:var(--white);color:var(--dark);border:2px solid var(--border)}
+.cta-b:hover{border-color:var(--red);color:var(--red)}
 
-  /* CONTACT FORM */
-  .contact-card {
-    background: var(--warm-white);
-    border: 1.5px solid var(--border);
-    border-radius: 16px;
-    padding: 28px;
-    margin-top: 28px;
-  }
-  .contact-card h3 {
-    font-family: 'DM Serif Display', serif;
-    font-size: 20px;
-    margin-bottom: 6px;
-  }
-  .contact-card p { font-size: 14px; color: var(--ash); margin-bottom: 20px; line-height: 1.5; }
-  .form-row { display: grid; grid-template-columns: 1fr 1fr; gap: 12px; margin-bottom: 12px; }
-  @media(max-width: 480px) { .form-row { grid-template-columns: 1fr; } }
-  .form-field label { display: block; font-size: 12px; font-weight: 500; color: var(--ash); margin-bottom: 5px; }
-  .form-field input, .form-field textarea {
-    width: 100%;
-    padding: 11px 13px;
-    border: 1.5px solid var(--border);
-    border-radius: 9px;
-    font-family: 'DM Sans', sans-serif;
-    font-size: 14px;
-    color: var(--smoke);
-    background: var(--cream);
-    transition: border-color .15s;
-    resize: vertical;
-  }
-  .form-field input:focus, .form-field textarea:focus { outline: none; border-color: var(--fire); background: #fff; }
-  .form-row-full { margin-bottom: 12px; }
-  .submit-row { display: flex; gap: 12px; align-items: center; margin-top: 16px; flex-wrap: wrap; }
-  .btn-submit {
-    background: var(--fire);
-    color: #fff;
-    border: none;
-    padding: 13px 32px;
-    border-radius: 10px;
-    font-family: 'DM Sans', sans-serif;
-    font-size: 15px;
-    font-weight: 500;
-    cursor: pointer;
-    transition: background .15s;
-  }
-  .btn-submit:hover { background: var(--fire-light); }
-  .submit-note { font-size: 12px; color: var(--ash); line-height: 1.5; }
-  .success-msg { display: none; background: #EDFAF2; border: 1px solid #9ED8B4; border-radius: 10px; padding: 14px 18px; font-size: 14px; color: var(--success); font-weight: 500; margin-top: 16px; }
-
-  .cta-row { display: flex; gap: 12px; margin-top: 28px; flex-wrap: wrap; }
-  .cta-row a {
-    flex: 1;
-    text-align: center;
-    padding: 13px 20px;
-    border-radius: 10px;
-    font-size: 14px;
-    font-weight: 500;
-    text-decoration: none;
-    transition: all .15s;
-    min-width: 140px;
-  }
-  .cta-primary { background: var(--fire); color: #fff; }
-  .cta-primary:hover { background: var(--fire-light); }
-  .cta-secondary { background: var(--warm-white); color: var(--smoke); border: 1.5px solid var(--border); }
-  .cta-secondary:hover { border-color: var(--fire); color: var(--fire); }
-
-  /* FOOTER */
-  footer {
-    text-align: center;
-    padding: 32px 20px;
-    font-size: 12px;
-    color: var(--ash);
-    border-top: 1px solid var(--border);
-    margin-top: 40px;
-  }
-  footer a { color: var(--fire); text-decoration: none; }
+footer{text-align:center;padding:28px 20px;font-size:12px;color:var(--muted);border-top:1px solid var(--border);margin-top:40px}
+footer a{color:var(--red);text-decoration:none}
 </style>
 </head>
 <body>
-
 <header>
-  <a href="https://www.krbylevne.cz" class="logo">
-    <svg class="logo-flame" viewBox="0 0 36 36" fill="none" xmlns="http://www.w3.org/2000/svg">
-      <path d="M18 3C18 3 8 12 8 20C8 25.523 12.477 30 18 30C23.523 30 28 25.523 28 20C28 12 18 3 18 3Z" fill="#F26722"/>
-      <path d="M18 11C18 11 13 16.5 13 20.5C13 23.538 15.239 26 18 26C20.761 26 23 23.538 23 20.5C23 16.5 18 11 18 11Z" fill="#FBBA2A"/>
-      <path d="M18 17C18 17 15.5 19.5 15.5 21.5C15.5 22.881 16.619 24 18 24C19.381 24 20.5 22.881 20.5 21.5C20.5 19.5 18 17 18 17Z" fill="white" opacity="0.7"/>
-    </svg>
-    <span class="logo-text">krby<span>levne</span>.cz</span>
+  <a href="https://www.krbylevne.cz">
+    <img src="data:image/png;base64,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" alt="krbylevne.cz" style="height:36px">
   </a>
-  <a href="https://www.krbylevne.cz" class="header-link">← zpět do e-shopu</a>
+  <div class="header-right">
+    <a href="https://www.krbylevne.cz/stavba-krbu" class="header-link">Stavba krbu</a>
+    <a href="https://www.krbylevne.cz" class="header-link">E-shop</a>
+    <a href="tel:+420800123456" class="header-phone">800 123 456</a>
+  </div>
 </header>
 
 <div class="hero">
-  <div class="hero-eyebrow">Bezplatný nástroj</div>
-  <h1>Kalkulačka stavby krbu</h1>
-  <p>Odpovězte na 6 jednoduchých otázek a my vám sestavíme přesný seznam materiálu s cenami přímo z našeho e-shopu.</p>
+  <div class="hero-inner">
+    <div class="hero-badge">Bezplatný nástroj</div>
+    <h1>Kalkulačka <span>stavby krbu</span></h1>
+    <p>6 otázek a dostanete přesný seznam materiálu s cenami přímo z našeho e-shopu. Připraveno odborníky krbylevne.cz.</p>
+  </div>
 </div>
 
-<div class="progress-wrap">
-  <div class="progress-label">
-    <span id="prog-text">Krok 1 z 6</span>
-    <span id="prog-pct">0 %</span>
+<div class="prog-wrap">
+  <div class="prog-inner">
+    <div class="prog-meta">
+      <span id="prog-text">Krok 1 z 6</span>
+      <span id="prog-pct">0 %</span>
+    </div>
+    <div class="prog-track"><div class="prog-fill" id="prog-fill" style="width:0%"></div></div>
+    <div class="dots" id="dots"></div>
   </div>
-  <div class="progress-bar-bg">
-    <div class="progress-bar-fill" id="prog-fill" style="width:0%"></div>
-  </div>
-  <div class="steps-dots" id="dots"></div>
 </div>
 
 <main id="main"></main>
 
 <footer>
-  &copy; 2025 <a href="https://www.krbylevne.cz">krbylevne.cz</a> &mdash; Kalkulačka je informační. Přesné množství závisí na konkrétním projektu.
-  Ceny jsou platné ke dni generování kalkulace a mohou se lišit od aktuálních cen v e-shopu.
+  &copy; 2025 <a href="https://www.krbylevne.cz">krbylevne.cz</a> &nbsp;|&nbsp;
+  Kalkulačka je informační. Přesné množství závisí na konkrétním projektu.
+  Ceny jsou orientační a mohou se lišit od aktuálních cen v e-shopu.
 </footer>
 
 <script>
-const STEPS = [
-  {
-    id:'vlozka', icon:'🔥', title:'Typ krbové vložky',
-    sub:'Jaký typ vložky budete zabudovávat?',
-    opts:[
-      {v:'teplovzd', icon:'🌬️', t:'Teplovzdušná', s:'Nejrozšířenější typ\nKonvekční vzduch'},
-      {v:'teplovodní', icon:'♨️', t:'Teplovodní', s:'Napojení na ÚT\nVyšší výkon'},
-      {v:'kamin', icon:'🪨', t:'Kamnová vložka', s:'Rohová nebo přímá\nMenší obestavba'},
-    ]
-  },
-  {
-    id:'vykon', icon:'⚡', title:'Výkon vložky',
-    sub:'Jakou plochu budete vytápět?',
-    opts:[
-      {v:'s', icon:'🏠', t:'Do 8 kW', s:'Místnost do 80 m²'},
-      {v:'m', icon:'🏡', t:'8–12 kW', s:'Místnost 80–150 m²'},
-      {v:'l', icon:'🏘️', t:'Nad 12 kW', s:'Velké prostory 150+ m²'},
-    ]
-  },
-  {
-    id:'material', icon:'🧱', title:'Materiál obestavby',
-    sub:'Z čeho postavíte stěny krbové komory?',
-    opts:[
-      {v:'skamotec', icon:'📐', t:'Skamotec 225', s:'Kalcium-silikát 40mm\nNejpopulárnější volba'},
-      {v:'thermax', icon:'🪨', t:'Thermax ECO', s:'Vermikulitové desky\nBez penetrace'},
-      {v:'ytong', icon:'🧱', t:'Ytong / Porotherm', s:'Klasické zdění\nNižší pořizovací cena'},
-    ]
-  },
-  {
-    id:'komin', icon:'🏗️', title:'Typ komínu',
-    sub:'Na jaký komín bude napojen kouřovod?',
-    opts:[
-      {v:'samot', icon:'🔴', t:'Šamotový', s:'Klasický zděný\nHrdlo ø150–200 mm'},
-      {v:'nerez', icon:'⚙️', t:'Nerezový systémový', s:'Izolovaný plášť\nPřímé napojení'},
-      {v:'novy', icon:'🆕', t:'Budu stavět nový', s:'Potřebuji celý\nkomínový systém'},
-    ]
-  },
-  {
-    id:'povrch', icon:'🎨', title:'Povrchová úprava',
-    sub:'Jaký bude finální vzhled krbu?',
-    opts:[
-      {v:'omitka', icon:'🖌️', t:'Omítka + barva', s:'Nejlevnější\nSnadno opravitelná'},
-      {v:'obklad', icon:'🟫', t:'Keramický obklad', s:'Trvanlivý\nVelký výběr dlaždic'},
-      {v:'kamen', icon:'🪨', t:'Přírodní kámen', s:'Luxusní vzhled\nVyšší cena'},
-      {v:'bez', icon:'⬜', t:'Zatím neřeším', s:'Pouze hrubá stavba'},
-    ]
-  },
-  {
-    id:'rozmery', type:'form', icon:'📏', title:'Rozměry místnosti',
-    sub:'Pro přesný výpočet množství materiálu.'
-  },
+const STEPS=[
+  {id:'vlozka',title:'Typ krbové vložky',sub:'Jaký typ vložky budete zabudovávat?',
+   opts:[{v:'teplovzd',icon:'🌬️',t:'Teplovzdušná',s:'Nejrozšířenější typ\nKonvekční vzduch'},
+         {v:'teplovodní',icon:'♨️',t:'Teplovodní',s:'Napojení na ÚT\nVyšší výkon'},
+         {v:'kamin',icon:'🪨',t:'Kamnová vložka',s:'Rohová nebo přímá\nMenší obestavba'}]},
+  {id:'vykon',title:'Výkon vložky',sub:'Jakou plochu budete vytápět?',
+   opts:[{v:'s',icon:'🏠',t:'Do 8 kW',s:'Místnost do 80 m²'},
+         {v:'m',icon:'🏡',t:'8–12 kW',s:'Místnost 80–150 m²'},
+         {v:'l',icon:'🏘️',t:'Nad 12 kW',s:'Velké prostory 150+ m²'}]},
+  {id:'material',title:'Materiál obestavby',sub:'Z čeho postavíte stěny krbové komory?',
+   opts:[{v:'skamotec',icon:'📐',t:'Skamotec 225',s:'Kalcium-silikát 40mm\nNejpopulárnější'},
+         {v:'thermax',icon:'🪨',t:'Thermax ECO',s:'Vermikulitové desky\nBez penetrace'},
+         {v:'ytong',icon:'🧱',t:'Ytong / Porotherm',s:'Klasické zdění\nNižší cena'}]},
+  {id:'komin',title:'Typ komínu',sub:'Na jaký komín bude napojen kouřovod?',
+   opts:[{v:'samot',icon:'🔴',t:'Šamotový',s:'Klasický zděný\nHrdlo ø150–200 mm'},
+         {v:'nerez',icon:'⚙️',t:'Nerezový systémový',s:'Izolovaný plášť\nPřímé napojení'},
+         {v:'novy',icon:'🆕',t:'Budu stavět nový',s:'Potřebuji celý\nkomínový systém'}]},
+  {id:'povrch',title:'Povrchová úprava',sub:'Jaký bude finální vzhled krbu?',
+   opts:[{v:'omitka',icon:'🖌️',t:'Omítka + barva',s:'Nejlevnější\nSnadno opravitelná'},
+         {v:'obklad',icon:'🟫',t:'Keramický obklad',s:'Trvanlivý\nVelký výběr'},
+         {v:'kamen',icon:'🪨',t:'Přírodní kámen',s:'Luxusní vzhled\nVyšší cena'},
+         {v:'bez',icon:'⬜',t:'Zatím neřeším',s:'Pouze hrubá stavba'}]},
+  {id:'rozmery',type:'form',title:'Rozměry místnosti',sub:'Pro přesný výpočet množství materiálu.'}
 ];
 
-// REAL products from krbylevne.cz
-const PRODUCTS = {
-  skamotec_deska: {
-    n: 'Skamotec 225 – izolační deska 40 mm (1000×610 mm)',
-    price: 812,
-    url: 'https://www.krbylevne.cz/p/skamol-izolacni-a-stavebni-deska-skamotec-225-40-mm',
-    unit: 'ks'
-  },
-  silapen: {
-    n: 'SILAPEN – univerzální penetrace 1 l',
-    price: 306,
-    url: 'https://www.krbylevne.cz/p/silapen-univerzalni-penetrace-1-l',
-    unit: 'l'
-  },
-  silaterm_lepidlo: {
-    n: 'Silaterm – univerzální lepidlo 6 kg',
-    price: 648,
-    url: 'https://www.krbylevne.cz/p/silaterm-univerzalni-lepidlo-6-kg',
-    unit: 'ks'
-  },
-  kourovod_trubka: {
-    n: 'Kouřovod – trubka ø150 mm / 100 cm / 1,5 mm',
-    price: 593,
-    url: 'https://www.krbylevne.cz/kourovody-1-5mm',
-    unit: 'ks'
-  },
-  kourovod_koleno: {
-    n: 'Kouřovod – koleno 90° / ø150 mm / 1,5 mm',
-    price: 402,
-    url: 'https://www.krbylevne.cz/kolena',
-    unit: 'ks'
-  },
-  kourovod_klapka: {
-    n: 'Kouřovod – klapka ø150 mm / 1,5 mm',
-    price: 547,
-    url: 'https://www.krbylevne.cz/trubky-s-klapkou',
-    unit: 'ks'
-  },
-  mrizka_spodni: {
-    n: 'Konvekční mřížka spodní (vzduchový vstup)',
-    price: 299,
-    url: 'https://www.krbylevne.cz/krbove-mrizky',
-    unit: 'ks'
-  },
-  mrizka_horni: {
-    n: 'Konvekční mřížka horní (vzduchový výstup)',
-    price: 299,
-    url: 'https://www.krbylevne.cz/krbove-mrizky',
-    unit: 'ks'
-  },
-  omitka_kamnarska: {
-    n: 'Silaterm MODEL – kamnářská omítka 25 kg',
-    price: 680,
-    url: 'https://www.krbylevne.cz/m/silaterm-1-2',
-    unit: 'ks'
-  },
-  tmel_obklad: {
-    n: 'Silaterm WHITE 600 – kamnářské lepidlo na obklady 5 kg',
-    price: 268,
-    url: 'https://www.krbylevne.cz/p/silaterm-kamnarske-bile-lepidlo-white-600-20-kg',
-    unit: 'ks'
-  },
-  // Thermax
-  thermax_deska: {
-    n: 'Thermax ECO – vermikulitová deska 40 mm (1000×610 mm)',
-    price: 690,
-    url: 'https://www.krbylevne.cz/stavba-krbu',
-    unit: 'ks'
-  },
-  thermax_lepidlo: {
-    n: 'Lepidlo na desky Thermax (1 kg)',
-    price: 185,
-    url: 'https://www.krbylevne.cz/stavba-krbu',
-    unit: 'ks'
-  },
+const P={
+  skamotec_deska:{n:'Skamotec 225 – izolační deska 40 mm (1000×610 mm)',price:812,url:'https://www.krbylevne.cz/p/skamol-izolacni-a-stavebni-deska-skamotec-225-40-mm',unit:'ks'},
+  silapen:{n:'SILAPEN – univerzální penetrace 1 l',price:306,url:'https://www.krbylevne.cz/p/silapen-univerzalni-penetrace-1-l',unit:'l'},
+  silaterm_lepidlo:{n:'Silaterm – univerzální lepidlo 6 kg',price:648,url:'https://www.krbylevne.cz/p/silaterm-univerzalni-lepidlo-6-kg',unit:'ks'},
+  kourovod_trubka:{n:'Kouřovod – trubka ø150 mm / 100 cm / 1,5 mm',price:593,url:'https://www.krbylevne.cz/kourovody-1-5mm',unit:'ks'},
+  kourovod_koleno:{n:'Kouřovod – koleno 90° / ø150 mm / 1,5 mm',price:402,url:'https://www.krbylevne.cz/kolena',unit:'ks'},
+  kourovod_klapka:{n:'Kouřovod – klapka ø150 mm / 1,5 mm',price:547,url:'https://www.krbylevne.cz/trubky-s-klapkou',unit:'ks'},
+  mrizka_sp:{n:'Konvekční mřížka spodní – vzduchový vstup',price:299,url:'https://www.krbylevne.cz/krbove-mrizky',unit:'ks'},
+  mrizka_hor:{n:'Konvekční mřížka horní – vzduchový výstup',price:299,url:'https://www.krbylevne.cz/krbove-mrizky',unit:'ks'},
+  omitka:{n:'Silaterm MODEL – kamnářská omítka 25 kg',price:680,url:'https://www.krbylevne.cz/m/silaterm-1-2',unit:'ks'},
+  tmel:{n:'Silaterm WHITE 600 – lepidlo na obklady 5 kg',price:268,url:'https://www.krbylevne.cz/p/silaterm-kamnarske-bile-lepidlo-white-600-20-kg',unit:'ks'},
+  thermax_deska:{n:'Thermax ECO – vermikulitová deska 40 mm',price:690,url:'https://www.krbylevne.cz/stavba-krbu',unit:'ks'},
+  thermax_lepidlo:{n:'Lepidlo na desky Thermax 1 kg',price:185,url:'https://www.krbylevne.cz/stavba-krbu',unit:'ks'},
+};
+const VLOZKY={
+  s:{label:'Krbová vložka teplovzdušná do 8 kW',price:12900,url:'https://www.krbylevne.cz/krbove-vlozky'},
+  m:{label:'Krbová vložka teplovzdušná 8–12 kW',price:18500,url:'https://www.krbylevne.cz/krbove-vlozky'},
+  l:{label:'Krbová vložka teplovzdušná 12+ kW',price:26000,url:'https://www.krbylevne.cz/krbove-vlozky'},
 };
 
-const VLOZKY = {
-  s:  { label: 'Krbová vložka teplovzdušná do 8 kW',  price: 12900, url: 'https://www.krbylevne.cz/krbove-vlozky' },
-  m:  { label: 'Krbová vložka teplovzdušná 8–12 kW', price: 18500, url: 'https://www.krbylevne.cz/krbove-vlozky' },
-  l:  { label: 'Krbová vložka teplovzdušná 12+ kW',  price: 26000, url: 'https://www.krbylevne.cz/krbove-vlozky' },
-};
+const state={step:0,vlozka:'',vykon:'',material:'',komin:'',povrch:'',plocha:20,vyska:2.6};
 
-const state = { step: 0, vlozka:'', vykon:'', material:'', komin:'', povrch:'', plocha:20, vyska:2.6 };
+function mul(){const a=parseFloat(state.plocha)||20;return a<60?.8:a<100?1:a<150?1.3:1.6}
+function fmt(n){return n.toLocaleString('cs-CZ')+' Kč'}
 
-function mul() {
-  const a = parseFloat(state.plocha) || 20;
-  return a < 60 ? 0.8 : a < 100 ? 1.0 : a < 150 ? 1.3 : 1.6;
-}
-
-function buildMaterials() {
-  const m = mul();
-  let rows = [];
-  // Obestavba
-  if (state.material === 'skamotec' || !state.material) {
-    rows.push({ cat:'Obestavba – izolace', ...PRODUCTS.skamotec_deska, qty: Math.ceil(4 * m) });
-    rows.push({ cat:'Obestavba – izolace', ...PRODUCTS.silapen, qty: Math.ceil(1 * m) });
-    rows.push({ cat:'Obestavba – izolace', ...PRODUCTS.silaterm_lepidlo, qty: Math.ceil(1 * m) });
-  } else if (state.material === 'thermax') {
-    rows.push({ cat:'Obestavba – izolace', ...PRODUCTS.thermax_deska, qty: Math.ceil(4 * m) });
-    rows.push({ cat:'Obestavba – izolace', ...PRODUCTS.thermax_lepidlo, qty: Math.ceil(3 * m) });
+function buildMats(){
+  const m=mul();let rows=[];
+  if(state.material==='thermax'){
+    rows.push({cat:'Obestavba',...P.thermax_deska,qty:Math.ceil(4*m)});
+    rows.push({cat:'Obestavba',...P.thermax_lepidlo,qty:Math.ceil(3*m)});
   } else {
-    rows.push({ cat:'Obestavba – izolace', ...PRODUCTS.skamotec_deska, qty: Math.ceil(2 * m), n:'Skamotec 225 40mm – výstelka (Ytong stavba)' });
-    rows.push({ cat:'Obestavba – izolace', ...PRODUCTS.silaterm_lepidlo, qty: 1 });
+    rows.push({cat:'Obestavba',...P.skamotec_deska,qty:Math.ceil(4*m)});
+    rows.push({cat:'Obestavba',...P.silapen,qty:Math.ceil(1*m)});
+    rows.push({cat:'Obestavba',...P.silaterm_lepidlo,qty:Math.ceil(1*m)});
   }
-  // Kouřovod
-  rows.push({ cat:'Kouřovod', ...PRODUCTS.kourovod_klapka, qty: 1 });
-  rows.push({ cat:'Kouřovod', ...PRODUCTS.kourovod_koleno, qty: 1 });
-  rows.push({ cat:'Kouřovod', ...PRODUCTS.kourovod_trubka, qty: 1 });
-  // Mřížky
-  if (state.vlozka !== 'kamin') {
-    rows.push({ cat:'Mřížky', ...PRODUCTS.mrizka_spodni, qty: 2 });
-    rows.push({ cat:'Mřížky', ...PRODUCTS.mrizka_horni, qty: 2 });
+  rows.push({cat:'Kouřovod',...P.kourovod_klapka,qty:1});
+  rows.push({cat:'Kouřovod',...P.kourovod_koleno,qty:1});
+  rows.push({cat:'Kouřovod',...P.kourovod_trubka,qty:1});
+  if(state.vlozka!=='kamin'){
+    rows.push({cat:'Mřížky',...P.mrizka_sp,qty:2});
+    rows.push({cat:'Mřížky',...P.mrizka_hor,qty:2});
   }
-  // Povrch
-  if (state.povrch === 'omitka') {
-    rows.push({ cat:'Povrchová úprava', ...PRODUCTS.omitka_kamnarska, qty: Math.ceil(1 * m) });
-  } else if (state.povrch === 'obklad' || state.povrch === 'kamen') {
-    rows.push({ cat:'Povrchová úprava', ...PRODUCTS.tmel_obklad, qty: Math.ceil(2 * m) });
-  }
+  if(state.povrch==='omitka') rows.push({cat:'Povrch',...P.omitka,qty:Math.ceil(1*m)});
+  else if(state.povrch==='obklad'||state.povrch==='kamen') rows.push({cat:'Povrch',...P.tmel,qty:Math.ceil(2*m)});
   return rows;
 }
 
-function groupBy(arr, key) {
-  return arr.reduce((acc, item) => {
-    (acc[item[key]] = acc[item[key]] || []).push(item);
-    return acc;
-  }, {});
+function updateProg(){
+  const pct=state.step>=STEPS.length?100:Math.round(state.step/STEPS.length*100);
+  document.getElementById('prog-fill').style.width=pct+'%';
+  document.getElementById('prog-pct').textContent=pct+' %';
+  document.getElementById('prog-text').textContent=state.step>=STEPS.length?'Kalkulace hotova!':'Krok '+(state.step+1)+' z '+STEPS.length;
+  const d=document.getElementById('dots');d.innerHTML='';
+  for(let i=0;i<=STEPS.length;i++){const el=document.createElement('div');el.className='dot'+(i===state.step?' active':i<state.step?' done':'');d.appendChild(el);}
 }
 
-function fmtPrice(n) {
-  return n.toLocaleString('cs-CZ') + ' Kč';
-}
-
-function updateProgress() {
-  const total = STEPS.length;
-  const pct = state.step >= total ? 100 : Math.round((state.step / total) * 100);
-  document.getElementById('prog-fill').style.width = pct + '%';
-  document.getElementById('prog-pct').textContent = pct + ' %';
-  document.getElementById('prog-text').textContent =
-    state.step >= total ? 'Kalkulace hotova!' : `Krok ${state.step + 1} z ${total}`;
-  const dots = document.getElementById('dots');
-  dots.innerHTML = '';
-  for (let i = 0; i <= total; i++) {
-    const d = document.createElement('div');
-    d.className = 'dot' + (i === state.step ? ' active' : i < state.step ? ' done' : '');
-    dots.appendChild(d);
-  }
-}
-
-function render() {
-  updateProgress();
-  const main = document.getElementById('main');
-  main.innerHTML = '';
-  if (state.step >= STEPS.length) {
-    renderResult(main);
-    return;
-  }
-  const s = STEPS[state.step];
-  const div = document.createElement('div');
-  div.className = 'step active';
-
-  div.innerHTML = `<div class="step-eyebrow">${s.icon} ${s.title}</div>
-    <h2>${s.title}</h2>
-    <p class="step-sub">${s.sub}</p>`;
-
-  if (s.type === 'form') {
-    div.innerHTML += `
-    <div class="info-box">
-      Tyto údaje slouží k výpočtu přibližného množství materiálu. Přesné množství závisí na konkrétním návrhu obestavby a rozměrech krbové vložky.
-    </div>
-    <div class="fields">
-      <div class="field">
-        <label>Plocha místnosti (m²)</label>
-        <input type="number" id="plocha" min="10" max="500" value="${state.plocha}" step="5">
-      </div>
-      <div class="field">
-        <label>Světlá výška stropu (m)</label>
-        <input type="number" id="vyska" min="2.2" max="5" value="${state.vyska}" step="0.1">
-      </div>
-    </div>`;
+function render(){
+  updateProg();
+  const main=document.getElementById('main');main.innerHTML='';
+  if(state.step>=STEPS.length){renderResult(main);return;}
+  const s=STEPS[state.step];
+  const div=document.createElement('div');div.className='step active';
+  div.innerHTML='<div class="step-num">Krok '+(state.step+1)+' z '+STEPS.length+'</div><h2>'+s.title+'</h2><p class="step-sub">'+s.sub+'</p>';
+  if(s.type==='form'){
+    div.innerHTML+='<div class="info-box">Tyto údaje slouží k výpočtu přibližného množství materiálu. Přesné množství závisí na konkrétním návrhu obestavby.</div><div class="fields"><div class="field"><label>Plocha místnosti (m²)</label><input type="number" id="plocha" min="10" max="500" value="'+state.plocha+'" step="5"></div><div class="field"><label>Výška stropu (m)</label><input type="number" id="vyska" min="2.2" max="5" value="'+state.vyska+'" step="0.1"></div></div>';
   } else {
-    let optsHtml = '<div class="opts">';
-    s.opts.forEach(o => {
-      const sel = state[s.id] === o.v ? ' sel' : '';
-      optsHtml += `<div class="opt${sel}" data-key="${s.id}" data-val="${o.v}">
-        <span class="opt-icon">${o.icon}</span>
-        <div class="opt-title">${o.t}</div>
-        <div class="opt-sub">${o.s.replace('\n', '<br>')}</div>
-      </div>`;
-    });
-    optsHtml += '</div>';
-    div.innerHTML += optsHtml;
+    let h='<div class="opts">';
+    s.opts.forEach(o=>{h+='<div class="opt'+(state[s.id]===o.v?' sel':'')+'" data-key="'+s.id+'" data-val="'+o.v+'"><span class="opt-icon">'+o.icon+'</span><div class="opt-title">'+o.t+'</div><div class="opt-sub">'+o.s.replace('\n','<br>')+'</div></div>';});
+    h+='</div>';div.innerHTML+=h;
   }
-
-  const nav = document.createElement('div');
-  nav.className = 'nav-row';
-  nav.innerHTML = `
-    <button class="btn" id="btnBack" ${state.step === 0 ? 'disabled' : ''}>← Zpět</button>
-    <button class="btn btn-primary" id="btnNext">${state.step === STEPS.length - 1 ? 'Zobrazit kalkulaci →' : 'Pokračovat →'}</button>`;
-  div.appendChild(nav);
-  main.appendChild(div);
-
-  main.querySelectorAll('.opt').forEach(el => {
-    el.addEventListener('click', () => {
-      main.querySelectorAll('.opt').forEach(x => x.classList.remove('sel'));
-      el.classList.add('sel');
-      state[el.dataset.key] = el.dataset.val;
-    });
+  const nav=document.createElement('div');nav.className='nav-row';
+  nav.innerHTML='<button class="btn" id="btnBack"'+(state.step===0?' disabled':'')+'>← Zpět</button><button class="btn btn-primary" id="btnNext">'+(state.step===STEPS.length-1?'Zobrazit kalkulaci →':'Pokračovat →')+'</button>';
+  div.appendChild(nav);main.appendChild(div);
+  main.querySelectorAll('.opt').forEach(el=>{
+    el.addEventListener('click',()=>{main.querySelectorAll('.opt').forEach(x=>x.classList.remove('sel'));el.classList.add('sel');state[el.dataset.key]=el.dataset.val;});
   });
-
-  document.getElementById('btnBack').addEventListener('click', () => { state.step--; render(); });
-  document.getElementById('btnNext').addEventListener('click', () => {
-    if (s.type === 'form') {
-      state.plocha = parseFloat(document.getElementById('plocha').value) || 20;
-      state.vyska = parseFloat(document.getElementById('vyska').value) || 2.6;
-    }
-    state.step++;
-    render();
-    window.scrollTo({ top: 0, behavior: 'smooth' });
+  document.getElementById('btnBack').addEventListener('click',()=>{state.step--;render();});
+  document.getElementById('btnNext').addEventListener('click',()=>{
+    if(s.type==='form'){state.plocha=parseFloat(document.getElementById('plocha').value)||20;state.vyska=parseFloat(document.getElementById('vyska').value)||2.6;}
+    state.step++;render();window.scrollTo({top:0,behavior:'smooth'});
   });
 }
 
-function renderResult(main) {
-  const mats = buildMaterials();
-  const matTotal = mats.reduce((a, x) => a + x.price * x.qty, 0);
-  const vlozka = VLOZKY[state.vykon] || VLOZKY['m'];
-  const celkem = matTotal + vlozka.price;
-  const grouped = groupBy(mats, 'cat');
-
-  const div = document.createElement('div');
-  div.className = 'step active';
-
-  // Hero stats
-  div.innerHTML = `
-  <div class="step-eyebrow">✅ Kalkulace připravena</div>
-  <h2>Přehled materiálu a cen</h2>
-  <p class="step-sub" style="margin-bottom:24px">Orientační kalkulace na základě vašich odpovědí. Kliknutím na produkt přejdete přímo na krbylevne.cz.</p>
-  <div class="result-hero">
-    <div class="stat-card">
-      <div class="stat-label">Materiál bez vložky</div>
-      <div class="stat-val">${fmtPrice(matTotal)}</div>
-      <div class="stat-sub">izolace, kouřovod, mřížky, povrch</div>
-    </div>
-    <div class="stat-card">
-      <div class="stat-label">Celkem vč. vložky</div>
-      <div class="stat-val accent">${fmtPrice(celkem)}</div>
-      <div class="stat-sub">orientační cena stavby</div>
-    </div>
-  </div>`;
-
-  // Krbová vložka
-  let html = `<div class="section-head">Krbová vložka</div>`;
-  html += `<div class="mat-row">
-    <div class="mat-name">${vlozka.label} <span style="font-size:11px;background:#FFF0E8;color:var(--fire);padding:2px 7px;border-radius:4px;margin-left:6px;">vybrat model</span></div>
-    <div class="mat-qty">1 ks</div>
-    <div class="mat-price">od ${fmtPrice(vlozka.price)}</div>
-    <a class="mat-btn" href="${vlozka.url}" target="_blank">→ vybrat</a>
-  </div>`;
-
-  // Materiál po skupinách
-  Object.entries(grouped).forEach(([cat, items]) => {
-    html += `<div class="section-head">${cat}</div>`;
-    items.forEach(item => {
-      html += `<div class="mat-row">
-        <div class="mat-name">${item.n}</div>
-        <div class="mat-qty">${item.qty} ${item.unit}</div>
-        <div class="mat-price">${fmtPrice(item.price * item.qty)}</div>
-        <a class="mat-btn" href="${item.url}" target="_blank">→ koupit</a>
-      </div>`;
-    });
+function renderResult(main){
+  const mats=buildMats();
+  const matTotal=mats.reduce((a,x)=>a+x.price*x.qty,0);
+  const vl=VLOZKY[state.vykon]||VLOZKY.m;
+  const celkem=matTotal+vl.price;
+  const groups=mats.reduce((a,x)=>({...a,[x.cat]:[...(a[x.cat]||[]),x]}),{});
+  const div=document.createElement('div');div.className='step active';
+  let h='<div class="step-num">✓ Kalkulace připravena</div><h2>Přehled materiálu</h2><p class="step-sub" style="margin-bottom:22px">Orientační kalkulace na základě vašich odpovědí. Kliknutím na produkt přejdete přímo na krbylevne.cz.</p>';
+  h+='<div class="result-banner"><div><div class="stat-lbl">Materiál bez vložky</div><div class="stat-val">'+fmt(matTotal)+'</div><div class="stat-note">izolace, kouřovod, mřížky, povrch</div></div><div><div class="stat-lbl">Celkem vč. vložky</div><div class="stat-val red">'+fmt(celkem)+'</div><div class="stat-note">orientační cena stavby</div></div></div>';
+  h+='<div class="sec-head">Krbová vložka</div><div class="mat-row"><div class="mat-name">'+vl.label+' <span style="font-size:10px;background:#F5E8E9;color:#CC1F27;padding:2px 6px;border-radius:2px;font-weight:700;text-transform:uppercase;letter-spacing:.04em">vybrat model</span></div><div class="mat-qty">1 ks</div><div class="mat-price">od '+fmt(vl.price)+'</div><a class="mat-btn" href="'+vl.url+'" target="_blank">Vybrat</a></div>';
+  Object.entries(groups).forEach(([cat,items])=>{
+    h+='<div class="sec-head">'+cat+'</div>';
+    items.forEach(x=>{h+='<div class="mat-row"><div class="mat-name">'+x.n+'</div><div class="mat-qty">'+x.qty+' '+x.unit+'</div><div class="mat-price">'+fmt(x.price*x.qty)+'</div><a class="mat-btn" href="'+x.url+'" target="_blank">Koupit</a></div>';});
   });
-
-  html += `<div class="total-box">
-    <div>
-      <div class="total-label">Celková orientační cena</div>
-      <div class="total-sub">materiál + krbová vložka, bez montáže</div>
-    </div>
-    <div class="total-val">${fmtPrice(celkem)}</div>
-  </div>`;
-
-  // Kontaktní formulář
-  html += `
-  <div class="contact-card">
-    <h3>Pošleme vám kalkulaci e-mailem</h3>
-    <p>Rádi vám zašleme tuto kalkulaci na e-mail a poradíme s výběrem konkrétní krbové vložky na míru vašemu domu.</p>
-    <div class="form-row">
-      <div class="form-field"><label>Jméno a příjmení</label><input type="text" id="f-jmeno" placeholder="Jan Novák"></div>
-      <div class="form-field"><label>Telefon</label><input type="tel" id="f-tel" placeholder="+420 600 000 000"></div>
-    </div>
-    <div class="form-row-full">
-      <div class="form-field"><label>E-mail *</label><input type="email" id="f-email" placeholder="jan@novak.cz"></div>
-    </div>
-    <div class="form-row-full">
-      <div class="form-field"><label>Zpráva (nepovinné)</label><textarea id="f-zprava" rows="3" placeholder="Máte dotaz k projektu? Napište nám…"></textarea></div>
-    </div>
-    <div class="submit-row">
-      <button class="btn-submit" id="btnSubmit">Odeslat poptávku</button>
-      <span class="submit-note">Odpovídáme do 1 pracovního dne.<br>Vaše data jsou v bezpečí.</span>
-    </div>
-    <div class="success-msg" id="successMsg">✅ Děkujeme! Kalkulaci jsme přijali a ozveme se vám co nejdříve.</div>
-  </div>`;
-
-  // CTA row
-  html += `<div class="cta-row">
-    <a href="https://www.krbylevne.cz/krbove-vlozky" target="_blank" class="cta-primary">Vybrat krbovou vložku →</a>
-    <a href="https://www.krbylevne.cz/stavba-krbu" target="_blank" class="cta-secondary">Vše na stavbu krbu</a>
-  </div>`;
-
-  html += `<div style="margin-top:28px;text-align:center">
-    <button class="btn" id="btnReset" style="width:auto">← Začít znovu</button>
-  </div>`;
-
-  div.innerHTML += html;
-  main.appendChild(div);
-
-  document.getElementById('btnReset').addEventListener('click', () => {
-    Object.assign(state, { step:0, vlozka:'', vykon:'', material:'', komin:'', povrch:'', plocha:20, vyska:2.6 });
-    render();
-    window.scrollTo({ top: 0, behavior: 'smooth' });
-  });
-
-  document.getElementById('btnSubmit').addEventListener('click', () => {
-    const email = document.getElementById('f-email').value.trim();
-    if (!email || !email.includes('@')) {
-      document.getElementById('f-email').focus();
-      return;
-    }
-    // In production: replace with your actual form endpoint / Shoptet integration
-    document.getElementById('successMsg').style.display = 'block';
-    document.getElementById('btnSubmit').disabled = true;
-    document.getElementById('btnSubmit').textContent = 'Odesláno ✓';
+  h+='<div class="total-box"><div><div class="total-lbl">Celková orientační cena</div><div class="total-sub">materiál + krbová vložka, bez montáže</div></div><div class="total-val">'+fmt(celkem)+'</div></div>';
+  h+='<div class="contact-card"><h3>Pošleme kalkulaci e-mailem</h3><p>Rádi vám zašleme tuto kalkulaci a poradíme s výběrem konkrétní krbové vložky na míru vašemu domu.</p><div class="form-row"><div class="form-field"><label>Jméno a příjmení</label><input type="text" id="f-jmeno" placeholder="Jan Novák"></div><div class="form-field"><label>Telefon</label><input type="tel" id="f-tel" placeholder="+420 600 000 000"></div></div><div class="form-row-full"><div class="form-field"><label>E-mail *</label><input type="email" id="f-email" placeholder="jan@novak.cz"></div></div><div class="form-row-full"><div class="form-field"><label>Zpráva (nepovinné)</label><textarea id="f-zprava" rows="3" placeholder="Máte dotaz k projektu?"></textarea></div></div><div class="submit-row"><button class="btn-submit" id="btnSubmit">Odeslat poptávku</button><span class="submit-note">Odpovídáme do 1 pracovního dne.<br>Vaše data jsou v bezpečí.</span></div><div class="success-msg" id="successMsg">✅ Děkujeme! Ozveme se co nejdříve.</div></div>';
+  h+='<div class="cta-row"><a href="https://www.krbylevne.cz/krbove-vlozky" target="_blank" class="cta-a">Vybrat krbovou vložku →</a><a href="https://www.krbylevne.cz/stavba-krbu" target="_blank" class="cta-b">Vše pro stavbu krbu</a></div>';
+  h+='<div style="margin-top:24px;text-align:center"><button class="btn" id="btnReset">← Začít znovu</button></div>';
+  div.innerHTML+=h;main.appendChild(div);
+  document.getElementById('btnReset').addEventListener('click',()=>{Object.assign(state,{step:0,vlozka:'',vykon:'',material:'',komin:'',povrch:'',plocha:20,vyska:2.6});render();window.scrollTo({top:0,behavior:'smooth'});});
+  document.getElementById('btnSubmit').addEventListener('click',()=>{
+    const email=document.getElementById('f-email').value.trim();
+    if(!email||!email.includes('@')){document.getElementById('f-email').focus();return;}
+    document.getElementById('successMsg').style.display='block';
+    document.getElementById('btnSubmit').disabled=true;document.getElementById('btnSubmit').textContent='Odesláno ✓';
   });
 }
 
